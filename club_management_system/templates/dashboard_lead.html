@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block title %}Lead Dashboard{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center">Welcome, {{ user.username }}!</h2>
+    <p class="text-center">Department: {{ user.department }}</p>
+    <p class="text-center">Role: <strong>Lead</strong></p>
+
+    <div class="row mt-4">
+        <!-- Assign Tasks -->
+        <div class="col-md-6 col-lg-3">
+            <div class="dashboard-box">
+                <h5 class="card-title">Assign Tasks</h5>
+                <p class="card-text">Delegate tasks to team members.</p>
+                <a href="{{ url_for('assign_task') }}" class="btn btn-primary">Assign Tasks</a>
+            </div>
+        </div>
+
+        <!-- Manage Events -->
+        <div class="col-md-6 col-lg-3">
+            <div class="dashboard-box">
+                <h5 class="card-title">Manage Events</h5>
+                <p class="card-text">Plan and update club activities and events.</p>
+                <a href="{{ url_for('manage_events') }}" class="btn btn-primary">Manage Events</a>
+            </div>
+        </div>
+
+        <!-- View Member Contributions -->
+        <div class="col-md-6 col-lg-3">
+            <div class="dashboard-box">
+                <h5 class="card-title">View Member Contributions</h5>
+                <p class="card-text">Track contributions of team members.</p>
+                <a href="{{ url_for('view_proposals') }}" class="btn btn-primary">View Contributions</a>
+            </div>
+        </div>
+
+        <!-- View Sales -->
+        <div class="col-md-6 col-lg-3">
+            <div class="dashboard-box">
+                <h5 class="card-title">View Sales</h5>
+                <p class="card-text">Track club product sales and view analytics.</p>
+                <a href="{{ url_for('manage_sales') }}" class="btn btn-primary">View Sales</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Gradient background for dashboard boxes */
+    .dashboard-box {
+        background: linear-gradient(135deg, #cceeff, #007bff);
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 15px rgba(0, 123, 255, 0.2);
+        text-align: center;
+        color: white;
+    }
+
+    .dashboard-box:hover {
+        box-shadow: 0 6px 20px rgba(0, 123, 255, 0.3);
+        transform: translateY(-3px);
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .btn-primary {
+        background-color: #0056b3;
+        border-color: #004085;
+    }
+
+    .btn-primary:hover {
+        background-color: #003d80;
+        border-color: #003366;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .dashboard-box {
+            margin-bottom: 30px;
+        }
+    }
+</style>
+{% endblock %}

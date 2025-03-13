@@ -1,0 +1,133 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background: url('../img/background.jpg') no-repeat center center fixed;
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.signup-container, .login-container {
+    width: 100%;
+    max-width: 500px;
+    padding: 30px;
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+}
+
+.signup-box h2, .login-box h2 {
+    font-weight: bold;
+    margin-bottom: 20px;
+    font-size: 26px;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-control {
+    width: 100%;
+    padding: 12px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    padding: 12px 18px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+.text-center a {
+    text-decoration: none;
+    color: #007bff;
+}
+
+.text-center a:hover {
+    text-decoration: underline;
+}
+
+.dashboard-button {
+    background-color: #007bff; /* Button color */
+    color: white; /* Text color */
+    padding: 15px 20px;
+    border-radius: 10px; /* Rounded corners */
+    border: none; /* No border */
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s; /* Smooth transition for hover */
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.2); /* Subtle glow */
+}
+
+.dashboard-button:hover {
+    transform: translateY(-3px); /* Slight hover lift */
+    box-shadow: 0 6px 20px rgba(0, 123, 255, 0.3); /* Stronger glow on hover */
+    text-decoration: none; /* Remove underline for links */
+}
+
+.dashboard-button-container {
+    margin: 10px; /* Spacing between buttons */
+    display: inline-block;
+}
+
+/* Gradient background for boxes */
+.dashboard-box {
+    background: linear-gradient(135deg, #cceeff, #007bff); /* Light blue to dark blue gradient */
+    border-radius: 10px; /* Rounded corners */
+    padding: 20px;
+    margin-bottom: 20px; /* Space between boxes */
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.2); /* Subtle glow */
+    color: white;
+    text-align: center;
+}
+
+/* Hover effect for dashboard-box */
+.dashboard-box:hover {
+    box-shadow: 0 6px 20px rgba(0, 123, 255, 0.3); /* Stronger glow on hover */
+    transform: translateY(-3px); /* Lift on hover */
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+/* White table with gradient background */
+.dashboard-table-container {
+    background: linear-gradient(135deg, #cceeff, #007bff); /* Gradient behind the table */
+    padding: 20px;
+    border-radius: 10px; /* Rounded corners */
+    margin-top: 20px; /* Space above the table */
+}
+
+.dashboard-table {
+    background: white; /* Keep table background white */
+    border-radius: 10px; /* Rounded corners for table */
+    overflow: hidden;
+    width: 100%;
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.1); /* Subtle shadow */
+}
+
+.dashboard-table th,
+.dashboard-table td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #dee2e6; /* Table border */
+}
+
+.dashboard-table th {
+    background: #f8f9fa; /* Light gray for header */
+    font-weight: bold;
+}
+

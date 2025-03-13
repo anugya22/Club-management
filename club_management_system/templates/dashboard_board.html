@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+
+{% block title %}Board Dashboard{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center">Welcome, {{ user.username }}!</h2>
+    <p class="text-center">Role: <strong>Board Member</strong></p>
+
+    <div class="row mt-4">
+        <!-- Assign Tasks -->
+        <div class="col-md-6 col-lg-3">
+            <div class="dashboard-box">
+                <h5 class="card-title">Assign Tasks</h5>
+                <p class="card-text">Delegate tasks to team members.</p>
+                <a href="{{ url_for('assign_task') }}" class="btn btn-primary">Assign Tasks</a>
+            </div>
+        </div>
+
+        <!-- Manage Events -->
+        <div class="col-md-6 col-lg-3">
+            <div class="dashboard-box">
+                <h5 class="card-title">Manage Events</h5>
+                <p class="card-text">Plan and update club activities and events.</p>
+                <a href="{{ url_for('manage_events') }}" class="btn btn-primary">Manage Events</a>
+            </div>
+        </div>
+
+        <!-- View Member Contributions -->
+        <div class="col-md-6 col-lg-3">
+            <div class="dashboard-box">
+                <h5 class="card-title">View Member Contributions</h5>
+                <p class="card-text">Track contributions of team members.</p>
+                <a href="{{ url_for('view_proposals') }}" class="btn btn-primary">View Contributions</a>
+            </div>
+        </div>
+
+        <!-- View Sales -->
+        <div class="col-md-6 col-lg-3">
+            <div class="dashboard-box">
+                <h5 class="card-title">View Sales</h5>
+                <p class="card-text">Track club product sales and view analytics.</p>
+                <a href="{{ url_for('manage_sales') }}" class="btn btn-primary">View Sales</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- View Leads -->
+    <div class="dashboard-table-container mt-5">
+        <h3 class="text-center">Leads of All Departments</h3>
+        <table class="dashboard-table table-bordered">
+            <thead>
+                <tr>
+                    <th>Department</th>
+                    <th>Lead Name</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for lead in leads %}
+                <tr>
+                    <td>{{ lead.department }}</td>
+                    <td>{{ lead.username }}</td>
+                    <td>{{ lead.email }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<style>
+    /* Gradient background for dashboard boxes */
+    .dashboard-box {
+        background: linear-gradient(135deg, #cceeff, #007bff);
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 15px rgba(0, 123, 255, 0.2);
+        text-align: center;
+        color: white;
+    }
+
+    .dashboard-box:hover {
+        box-shadow: 0 6px 20px rgba(0, 123, 255, 0.3);
+        transform: translateY(-3px);
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    /* Gradient background for table container */
+    .dashboard-table-container {
+        background: linear-gradient(135deg, #cceeff, #007bff);
+        padding: 20px;
+        border-radius: 10px;
+        margin-top: 20px;
+    }
+
+    .dashboard-table {
+        background: white;
+        border-radius: 10px;
+        overflow: hidden;
+        width: 100%;
+        box-shadow: 0 4px 15px rgba(0, 123, 255, 0.1);
+    }
+
+    .dashboard-table th,
+    .dashboard-table td {
+        padding: 10px;
+        text-align: left;
+        border: 1px solid #dee2e6;
+    }
+
+    .dashboard-table th {
+        background: #f8f9fa;
+        font-weight: bold;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .dashboard-box {
+            margin-bottom: 30px;
+        }
+    }
+</style>
+{% endblock %}

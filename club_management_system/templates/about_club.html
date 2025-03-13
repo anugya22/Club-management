@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %}About the Club{% endblock %}
+
+{% block content %}
+<style>
+    .gallery-container {
+        display: flex;
+        overflow-x: auto;
+        gap: 15px;
+        padding: 20px;
+    }
+
+    .gallery-item {
+        flex: 0 0 auto;
+        width: 300px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        text-align: center;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .gallery-item img {
+        width: 100%;
+        border-bottom: 1px solid #ddd;
+        border-radius: 8px 8px 0 0;
+    }
+
+    .gallery-item p {
+        padding: 10px;
+        font-size: 14px;
+    }
+</style>
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">About Our Club</h2>
+    <div class="gallery-container">
+        {% for item in club_info %}
+        <div class="gallery-item">
+            <img src="{{ item.image }}" alt="Club Image">
+            <p>{{ item.text }}</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

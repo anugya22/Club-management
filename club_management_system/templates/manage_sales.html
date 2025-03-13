@@ -1,0 +1,159 @@
+{% extends "base.html" %}
+
+{% block title %}Manage Sales{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center">Manage Sales</h2>
+
+    <h3>Update Product Sales</h3>
+    <form method="POST" action="{{ url_for('update_sales') }}">
+        <div class="row">
+            <div class="col-md-4">
+                <select name="product_id" class="form-control" required>
+                    {% for product in products %}
+                    <option value="{{ product.id }}">{{ product.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-3">
+                <input
+                    type="number"
+                    name="quantity_sold"
+                    class="form-control"
+                    placeholder="Quantity Sold"
+                    step="1"
+                    required
+                />
+            </div>
+            <div class="col-md-2">
+                <button type="submit" class="btn btn-primary w-100">Update Sales</button>
+            </div>
+        </div>
+    </form>
+    
+
+
+    <!-- Add Product Form -->
+    <div class="mt-4">
+        <h4>Add Product</h4>
+        <form method="POST" action="{{ url_for('manage_sales') }}">
+            <div class="row">
+                <div class="col-md-4">
+                    <input
+                        type="text"
+                        name="name"
+                        class="form-control"
+                        placeholder="Product Name"
+                        required
+                    />
+                </div>
+                <div class="col-md-3">
+                    <input
+                        type="number"
+                        name="price"
+                        class="form-control"
+                        placeholder="Price"
+                        step="0.01"
+                        required
+                    />
+                </div>
+                <div class="col-md-3">
+                    <input
+                        type="number"
+                        name="quantity_sold"
+                        class="form-control"
+                        placeholder="Quantity Sold"
+                        required
+                    />
+                </div>
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-primary w-100">Add Product</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- Products Table -->
+    <div class="mt-5">
+        <h4>Products</h4>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Sales</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in products %}
+                <tr>
+                    <td>{{ product.name }}</td>
+                    <td>${{ product.price }}</td>
+                    <td>${{ "%.2f"|format(product.sales) }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Sales Analytics -->
+    <div class="mt-5">
+        <h3>Sales Analytics</h3>
+<div class="text-center">
+    <img src="{{ url_for('sales_chart') }}" alt="Sales Pie Chart" class="img-fluid" style="max-width: 500px;">
+</div>
+
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    // Data for the chart
+    const productNames = {{ product_names | safe }};
+    const productSales = {{ product_sales | safe }};
+
+    // Check if there are sales to display
+    if (productSales.length > 0 && productSales.some(sale => sale > 0)) {
+        const ctx = document.getElementById("salesPieChart").getContext("2d");
+        new Chart(ctx, {
+            type: "pie",
+            data: {
+                labels: productNames,
+                datasets: [
+                    {
+                        label: "Sales Distribution",
+                        data: productSales,
+                        backgroundColor: [
+                            "rgba(255, 99, 132, 0.2)",
+                            "rgba(54, 162, 235, 0.2)",
+                            "rgba(255, 206, 86, 0.2)",
+                            "rgba(75, 192, 192, 0.2)",
+                            "rgba(153, 102, 255, 0.2)",
+                            "rgba(255, 159, 64, 0.2)",
+                        ],
+                        borderColor: [
+                            "rgba(255, 99, 132, 1)",
+                            "rgba(54, 162, 235, 1)",
+                            "rgba(255, 206, 86, 1)",
+                            "rgba(75, 192, 192, 1)",
+                            "rgba(153, 102, 255, 1)",
+                            "rgba(255, 159, 64, 1)",
+                        ],
+                        borderWidth: 1,
+                    },
+                ],
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { position: "top" },
+                },
+            },
+        });
+    } else {
+        const chartContainer = document.getElementById("salesPieChart").parentElement;
+        chartContainer.innerHTML = "<p class='text-danger'>No sales data available.</p>";
+    }
+</script>
+{% endblock %}

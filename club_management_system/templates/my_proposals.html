@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}
+My Proposals
+{% endblock %}
+
+{% block content %}
+<h2>My Submitted Proposals</h2>
+<ul class="list-group">
+    {% for proposal in proposals %}
+    <li class="list-group-item">
+        <p>{{ proposal.content }}</p>
+        <small>Submitted on {{ proposal.created_at.strftime('%Y-%m-%d %H:%M:%S') }}</small>
+    </li>
+    {% else %}
+    <li class="list-group-item">No proposals submitted yet.</li>
+    {% endfor %}
+</ul>
+<a href="{{ url_for('dashboard_member') }}" class="btn btn-primary mt-3">Back to Dashboard</a>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}Contact Lead{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center">Contact Lead</h2>
+    <div class="mt-4">
+        {% if leads %}
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Department</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for lead in leads %}
+                <tr>
+                    <td>{{ lead.username }}</td>
+                    <td>{{ lead.email }}</td>
+                    <td>{{ lead.department }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p class="text-center">No leads found.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

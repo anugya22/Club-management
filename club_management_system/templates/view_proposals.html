@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}View Proposals{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center">All Proposals</h2>
+    <table class="table table-bordered mt-4">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Submitted By</th>
+                <th>Content</th>
+                <th>Submitted At</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for proposal in proposals %}
+            <tr>
+                <td>{{ proposal.id }}</td>
+                <td>{{ proposal.user.username }} ({{ proposal.user.email }})</td>
+                <td>{{ proposal.content }}</td>
+                <td>{{ proposal.created_at }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
