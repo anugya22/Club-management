@@ -10,11 +10,9 @@ import os
 from matplotlib.figure import Figure
 import io
 from dotenv import load_dotenv
-import os
 
 
-port = int(os.environ.get("PORT", 5000))
-app.run(host="0.0.0.0", port=port)
+
 
 load_dotenv()
 print(f"Loaded MAIL_USERNAME: {os.getenv('MAIL_USERNAME')}")
