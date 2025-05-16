@@ -6,3 +6,4 @@ Flask-WTF
 Flask-Mail
 matplotlib
 python-dotenv
+psycopg2-binary
