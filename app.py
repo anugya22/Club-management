@@ -11,51 +11,27 @@ from matplotlib.figure import Figure
 import io
 from dotenv import load_dotenv
 
-
-
-
-load_dotenv()
-print(f"Loaded MAIL_USERNAME: {os.getenv('MAIL_USERNAME')}")
-print(f"Loaded MAIL_PASSWORD: {os.getenv('MAIL_PASSWORD')}")
-
+load_dotenv()  # Loads .env file locally (for dev only)
 
 app = Flask(__name__)
 
-# Secure mail server configuration using environment variables
+# Load mail credentials from environment variables securely
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 587
 app.config['MAIL_USE_TLS'] = True
 app.config['MAIL_USE_SSL'] = False
-app.config['MAIL_USERNAME'] = 'anugya2202@gmail.com'
-app.config['MAIL_PASSWORD'] = 'Kartikrinky22'
-app.config['MAIL_DEFAULT_SENDER'] = 'anugya2202@gmail.com'
-  # Default sender from env
+app.config['MAIL_USERNAME'] = os.getenv('MAIL_USERNAME')  # Set this in Render env vars or .env
+app.config['MAIL_PASSWORD'] = os.getenv('MAIL_PASSWORD')  # Set this in Render env vars or .env
+app.config['MAIL_DEFAULT_SENDER'] = app.config['MAIL_USERNAME']  # Use the same sender email
 app.config['MAIL_DEBUG'] = True  # Enable debugging
 
-
-# Initialize Flask-Mail
 mail = Mail(app)
 app.config.from_object("config.Config")
 
-@app.route("/test-email")
-def test_email():
-    try:
-        msg = Message(
-            subject="Test Email",
-            recipients=["pranjalup25@gmail.com"],  # Replace with your test recipient
-            body="This is a test email sent from Flask-Mail."
-        )
-        mail.send(msg)
-        return "Email sent successfully!"
-    except Exception as e:
-        return f"Failed to send email: {e}"
-
-
-# Initialize database and Flask-Login
+# Initialize database and login manager
 db.init_app(app)
 login_manager = LoginManager(app)
 login_manager.login_view = "login"
-
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -337,8 +313,9 @@ def update_sales():
 @app.route("/assign-task", methods=["GET", "POST"])
 @login_required
 def assign_task():
+    # Only allow leads or board members to send email tasks
     if current_user.position not in ["lead", "board"]:
-        flash("You do not have permission to access this page.", "danger")
+        flash("You do not have permission to assign tasks via email.", "danger")
         return redirect(url_for("dashboard_member"))
 
     members = User.query.filter_by(position="member").all()
