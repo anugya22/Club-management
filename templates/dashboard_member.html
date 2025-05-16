@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+
+{% block title %}
+Member Dashboard
+{% endblock %}
+
+{% block content %}
+<style>
+    body {
+        background: linear-gradient(to bottom, #e0f7fa, #0288d1); /* Gradient background */
+        color: #333;
+    }
+
+    .card {
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        background: white;
+    }
+
+    .card:hover {
+        transform: scale(1.03);
+        transition: all 0.3s ease;
+    }
+
+    .btn-primary {
+        background: #0288d1;
+        border: none;
+    }
+
+    .btn-primary:hover {
+        background: #0277bd;
+        border: none;
+    }
+
+    .container {
+        margin-top: 50px;
+    }
+</style>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12 text-center">
+            <h1>Welcome, {{ user.username }}</h1>
+            <p>Department: {{ user.department }}</p>
+            <p>Role: <strong>Member</strong></p>
+        </div>
+    </div>
+
+    <!-- Functionalities -->
+    <div class="row mt-4">
+        <div class="col-md-4">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">View Club Activities</h5>
+                    <p class="card-text">Keep track of upcoming club events and activities.</p>
+                    <a href="{{ url_for('view_activities') }}" class="btn btn-primary">View Activities</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Submit Proposals</h5>
+                    <p class="card-text">Have ideas? Submit proposals for club activities here.</p>
+                    <a href="{{ url_for('submit_proposal') }}" class="btn btn-primary">Submit Proposal</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Contact Lead</h5>
+                    <p class="card-text">Reach out to your team lead for assistance.</p>
+                    <a href="{{ url_for('contact_lead') }}" class="btn btn-primary">Contact Lead</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-4">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">About the Club</h5>
+                    <p class="card-text">Learn more about our club and its activities.</p>
+                    <a href="{{ url_for('about_club') }}" class="btn btn-primary">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container mt-5">
+    <h2>Welcome, {{ user.username }}</h2>
+    <p>Department: {{ user.department }}</p>
+    <p>Role: Member</p>
+
+    <div class="mt-4">
+        <h3>Assigned Tasks</h3>
+        {% if tasks %}
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Task</th>
+                    <th>Assigned By</th>
+                    <th>Date Assigned</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for task in tasks %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ task.task_content }}</td>
+                    <td>{{ task.assigned_by }}</td>
+                    <td>{{ task.created_at.strftime('%Y-%m-%d') }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p>No tasks assigned yet.</p>
+        {% endif %}
+    </div>
+</div>
+
+</div>
+{% endblock %}

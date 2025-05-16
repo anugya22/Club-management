@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}
+Submit Proposal
+{% endblock %}
+
+{% block content %}
+<h2>Submit a Proposal</h2>
+<form method="POST" action="{{ url_for('submit_proposal') }}">
+    <div class="mb-3">
+        <label for="proposal" class="form-label">Your Proposal</label>
+        <textarea class="form-control" id="proposal" name="proposal" rows="4" placeholder="Enter your proposal here..."></textarea>
+    </div>
+    <button type="submit" class="btn btn-success">Submit Proposal</button>
+</form>
+<a href="{{ url_for('dashboard_member') }}" class="btn btn-secondary mt-3">Back to Dashboard</a>
+{% endblock %}

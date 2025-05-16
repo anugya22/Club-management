@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block title %}Sales Dashboard{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center">Sales Dashboard</h2>
+    
+    <!-- Pie Chart -->
+    <div class="text-center my-4">
+        <img src="{{ url_for('sales_chart') }}" alt="Sales Pie Chart" class="img-fluid">
+    </div>
+
+    <!-- Products Table -->
+    <h3>Products and Sales</h3>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Product Name</th>
+                <th>Price</th>
+                <th>Total Sales</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for product in products %}
+            <tr>
+                <td>{{ product.name }}</td>
+                <td>${{ product.price }}</td>
+                <td>${{ product.sales }}</td>
+            </tr>
+            {% endfor %}
+            {% if products|length == 0 %}
+            <tr>
+                <td colspan="3" class="text-center">No products available.</td>
+            </tr>
+            {% endif %}
+        </tbody>
+    </table>
+
+    <!-- Add Product Form -->
+    <h3 class="mt-4">Add New Product</h3>
+    <form method="POST" action="{{ url_for('sales_dashboard') }}">
+        <div class="mb-3">
+            <label for="product_name" class="form-label">Product Name</label>
+            <input type="text" class="form-control" id="product_name" name="product_name" required>
+        </div>
+        <div class="mb-3">
+            <label for="product_price" class="form-label">Price</label>
+            <input type="number" step="0.01" class="form-control" id="product_price" name="product_price" required>
+        </div>
+        <div class="mb-3">
+            <label for="product_sales" class="form-label">Initial Sales (optional)</label>
+            <input type="number" step="0.01" class="form-control" id="product_sales" name="product_sales">
+        </div>
+        <button type="submit" class="btn btn-success">Add Product</button>
+    </form>
+</div>
+{% endblock %}

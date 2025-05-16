@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Assign Task{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center">Assign Task to Members</h2>
+    <form method="POST">
+        <div class="mb-3">
+            <label for="recipient_email" class="form-label">Select Member</label>
+            <select name="recipient_email" id="recipient_email" class="form-select">
+                {% for member in members %}
+                <option value="{{ member.email }}">{{ member.username }} ({{ member.email }})</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="task_content" class="form-label">Task Content</label>
+            <textarea name="task_content" id="task_content" class="form-control" rows="4" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Send Task</button>
+    </form>
+</div>
+{% endblock %}

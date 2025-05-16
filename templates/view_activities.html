@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}
+View Activities
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center">Club Activities</h2>
+    <div class="mt-4">
+        <ul class="list-group">
+            {% for activity in activities %}
+            <li class="list-group-item">
+                <h5>{{ activity.title }}</h5>
+                <p><strong>Date:</strong> {{ activity.date }}</p>
+                <p>{{ activity.description }}</p>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}
