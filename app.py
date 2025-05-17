@@ -11,6 +11,7 @@ from matplotlib.figure import Figure
 import io
 from dotenv import load_dotenv
 
+
 load_dotenv()  # Loads .env file locally (for dev only)
 
 app = Flask(__name__)
@@ -346,7 +347,7 @@ def assign_task():
 if __name__ == "__main__":
     with app.app_context():
         db.create_all()
+
     port = int(os.environ.get("PORT", 5000))
-    app.run(host="0.0.0.0", port=port)
-
-
+    # Run with debug=False for production
+    app.run(host="0.0.0.0", port=port, debug=False)
